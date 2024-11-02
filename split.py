@@ -15,7 +15,7 @@ for pdf in pdfs:
     filename = splitext(basename(pdf))[0]
     parent_path = abspath(OUTPUT_PATH + "/" + filename)
     if not isdir(parent_path):
-        mkdir(parent_path)
+        mkdir(parent_path)  # TODO: strip the string before make dir
     pdf_obj = PdfReader(open(pdf, "rb"))
     for i in range(len(pdf_obj.pages)):
         output = PdfWriter()

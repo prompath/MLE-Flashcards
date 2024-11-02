@@ -1,13 +1,28 @@
 from glob import glob
 from random import shuffle
-from os.path import abspath
+from os.path import abspath, sep, basename
 from pathlib import Path
 import webbrowser
 
 RECURSIVE = True
 PARENT_DIR = abspath("./split/")
 
-cards = glob(PARENT_DIR + "/*/*.pdf", recursive=RECURSIVE)
+topics = glob(abspath(PARENT_DIR + "/*" + sep))
+topics_dict = {
+    int(basename(topic)[0]): {"name": basename(topic)[2:].strip(), "path": topic}
+    for topic in topics
+}
+print("Select the topic. Leave blank to include all topics.")
+for i in range(len(topics_dict)):
+    print(f"{i + 1}: {topics_dict[i + 1].get('name')}")
+
+selector = input()
+if selector == "":
+    glob_dir = PARENT_DIR + "/*/*.pdf"
+else:
+    glob_dir = topics_dict[int(selector)].get("path") + "/*.pdf"
+
+cards = glob(glob_dir, recursive=RECURSIVE)
 cards_uri = [Path(card).as_uri() for card in cards]
 
 shuffled_cards = cards_uri.copy()
