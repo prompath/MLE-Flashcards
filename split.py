@@ -20,5 +20,5 @@ for pdf in pdfs:
     for i in range(len(pdf_obj.pages)):
         output = PdfWriter()
         output.add_page(pdf_obj.pages[i])
-        with open(f"{parent_path}/{filename}-page{i+1}.pdf", "wb") as outputStream:
+        with open(f"{parent_path}/{filename}-page{i+1:02}.pdf", "wb") as outputStream:
             output.write(outputStream)
