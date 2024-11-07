@@ -12,10 +12,10 @@ if not isdir(OUTPUT_PATH):
 pdfs = glob(abspath("./*.pdf"))
 
 for pdf in pdfs:
-    filename = splitext(basename(pdf))[0]
-    parent_path = abspath(OUTPUT_PATH + "/" + filename)
+    filename = splitext(basename(pdf))[0].strip()
+    parent_path = abspath(OUTPUT_PATH + "/" + filename).strip()
     if not isdir(parent_path):
-        mkdir(parent_path)  # TODO: strip the string before make dir
+        mkdir(parent_path)
     pdf_obj = PdfReader(open(pdf, "rb"))
     for i in range(len(pdf_obj.pages)):
         output = PdfWriter()
